@@ -1,17 +1,13 @@
-//require('dotenv/config')
+require('dotenv/config')
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
-var host = 'localhost'
-var port = '27017'
-var dbName = 'vegetarian-cookbook-db'
+var host = process.env.DB_HOST
+var port = process.env.DB_PORT
+var dbName = process.env.DB_NAME
 
 var connection = `mongodb://${host}:${port}/${dbName}`
 
-module.exports = mongoose.connect(connection, {useNewUrlParser: true}, function(error){
-    if(error) {
-        console.log("Error conection with DB:" + error);
-    } else {
-        console.log('Connected to database');
-    }
+module.exports = mongoose.connect(connection, {useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
+    if(error) console.log(`Error conection with DB: ${error}`);
 });
