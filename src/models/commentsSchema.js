@@ -6,6 +6,6 @@ const commentsSchema = new mongoose.Schema({
         required: true
     },
     grade: Number
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = mongoose.model('Comment', commentsSchema)

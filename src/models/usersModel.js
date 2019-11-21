@@ -33,6 +33,6 @@ const usersSchema = new mongoose.Schema({
         type: ObjectId,
         ref: 'User'
     }],
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = mongoose.model('User', usersSchema)

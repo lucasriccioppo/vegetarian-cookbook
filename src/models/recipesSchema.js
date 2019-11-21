@@ -27,6 +27,6 @@ const recipesSchema = new mongoose.Schema({
         required: true
     },
     flags: [String]
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = mongoose.model('Recipe', recipesSchema)
