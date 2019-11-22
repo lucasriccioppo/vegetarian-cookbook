@@ -4,11 +4,13 @@ const { ObjectId } = mongoose.Schema.Types
 const usersSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     name: {
         type: String,

@@ -8,6 +8,6 @@ var dbName = process.env.DB_NAME
 
 var connection = `mongodb://${host}:${port}/${dbName}`
 
-module.exports = mongoose.connect(connection, {useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
+module.exports = mongoose.connect(connection, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }, (error) => {
     if(error) console.log(`Error conection with DB: ${error}`);
 });
