@@ -1,14 +1,13 @@
 const express = require('express')
 const categoryRouter = express.Router();
-const categoryService = require('../services/categorieService')
+const categoryController = require('../controllers/categoryController')
 
-categoryRouter.post('/create', (req, res) => {
-    categoryService.createCategory({name: 'Teste'})
-    res.send('OK!')
+categoryRouter.post('/', (req, res, next) => {
+    categoryController.createCategory(req, res, next)
 })
 
-categoryRouter.get('/find', (req, res) => {
-    res.send(categoryService.findCategories())
+categoryRouter.get('/', (req, res, next) => {
+    categoryController.findCategories(req, res, next)
 })
 
 module.exports = categoryRouter
