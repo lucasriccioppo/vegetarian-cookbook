@@ -1,12 +1,17 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
 // const generateToken = (data) => return 
 
-// Implementar com jwt
 const encryptPassword = (password) => {
-    return password
+    return bcrypt.hashSync(password, 10);
+}
+
+const verifyPassword = (password, hash) => {
+    return bcrypt.compareSync(password, hash);
 }
 
 module.exports = {
-    encryptPassword
+    encryptPassword,
+    verifyPassword
 }

@@ -1,20 +1,22 @@
 const userService = require('../services/userService')
 const HttpStatus = require('http-status-codes')
-const { encryptPassword } = require('../utils/auth')
+const { encryptPassword, verifyPassword } = require('../utils/auth')
 
 const createUser = async (req, res, next) => {
     const data = req.body
     
+    const password = encryptPassword(data.password)
+
     const user = {
         email: data.email,
-        password: encryptPassword(data.password),
+        password,
         name: data.name,
         lastName: data.lastName,
         avatar: data.avatar
     }
 
     try {
-        const createdUser = await userService.createUser(user)
+        await userService.createUser(user)
         res.status(HttpStatus.CREATED).send({ msg: "Usuário criado com sucesso!" })
     } catch(err) {
         res.status(HttpStatus.BAD_REQUEST).send(`Erro ao criar usuário: ${err}`)
@@ -45,8 +47,24 @@ const removeUser = async (req, res, next) => {
     }
 }
 
+const login = async (req, res, next) => {
+    const { email, password } = req.body
+    
+    try {
+        const user = await userService.findForLogin(email)
+        if(verifyPassword(password, user.password))
+            res.status(HttpStatus.OK).send({ msg: "Logado!" })
+        else
+            res.status(HttpStatus.BAD_REQUEST).send({ msg: "Email e/ou senha incorretos!" })
+
+    } catch(err) {
+        res.status(HttpStatus.BAD_REQUEST).send(`Erro ao fazer login: ${err}`)
+    }
+}
+
 module.exports = {
     createUser,
     findUsers,
-    removeUser
+    removeUser,
+    login
 }
