@@ -2,7 +2,7 @@ const Recipe = require('../models/recipesSchema')
 
 const createRecipe = (recipe) => Recipe.create(recipe)
 
-const findRecipes = () => Recipe.find()
+const findRecipes = (options = {}) => Recipe.find(options)
 
 const findRecipeById = (id) => Recipe.findById(id)
 

@@ -10,4 +10,8 @@ recipeRouter.get('/', (req, res, next) => {
     recipeController.findRecipes(req, res, next)
 })
 
+recipeRouter.get('/findByOwner/:ownerId', (req, res, next) => {
+    recipeController.findRecipesByUser(req, res, next)
+})
+
 module.exports = recipeRouter

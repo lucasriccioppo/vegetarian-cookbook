@@ -30,7 +30,19 @@ const findRecipes = async (req, res, next) => {
     }
 }
 
+const findRecipesByUser = async (req, res, next) => {
+    const options = { owner: req.params.ownerId }
+
+    try {
+        const recipes = await recipeService.findRecipes(options)
+        res.status(HttpStatus.OK).send(recipes)
+    } catch(err) {
+        res.status(HttpStatus.BAD_REQUEST).send(`Erro ao recuperar receitas: ${err}`)
+    }
+}
+
 module.exports = {
     createRecipe,
-    findRecipes
+    findRecipes,
+    findRecipesByUser
 }
