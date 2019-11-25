@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema.Types
 
 const recipesSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
     owner: {
         type: ObjectId,
         ref: 'User',
@@ -20,11 +24,6 @@ const recipesSchema = new mongoose.Schema({
     comments: {
         type: ObjectId,
         ref: 'Comment'
-    },
-    comments: {
-        type: ObjectId,
-        ref: 'Category',
-        required: true
     },
     flags: [String]
 }, { timestamps: true })
