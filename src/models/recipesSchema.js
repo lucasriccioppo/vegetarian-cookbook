@@ -21,10 +21,6 @@ const recipesSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    comments: {
-        type: ObjectId,
-        ref: 'Comment'
-    },
     flags: [String]
 }, { timestamps: true })
 
